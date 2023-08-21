@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- HTML주석 (소스보기 했을때 화면에 출력된다.)
-조통의 경우 인클루드 되는 JSP파일은 HTML태그없이 순수한 JSP코드만 작성하는
+보통의 경우 인클루드 되는 JSP파일은 HTML태그없이 순수한 JSP코드만 작성하는
 것이 좋다. 포함되었을때 HTML태그가 중복될 수 있기 때문이다.
  -->
 <%-- JSP주석 (소스보기 하더라도 출력되지 않는다.)
