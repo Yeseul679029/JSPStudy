@@ -6,11 +6,18 @@
 	<jsp:include page="../Common/Link.jsp" />
     <h2>로그인 페이지</h2>
  
+ 	<!-- 로그인을 위해 폼값을 전송한 후 만약 조건에 맞는 회원정보가 없는
+ 	경우 request영역에 에러메세지를 저장한 후 현재페이지로 forward한다.
+ 	request영역은 forward된 페이지까지는 영역이 공유되므로 아래에 메세지를
+ 	출력할 수 있다. -->
     <span style="color: red; font-size: 1.2em;"> 
         <%= request.getAttribute("LoginErrMsg") == null ?
                 "" : request.getAttribute("LoginErrMsg") %>
     </span>
+    
     <%
+    /* session영역에 해당 속성값이 있는지 확인한다. 즉, session영역에
+    데이터가 없다면 로그아웃 상태이므로 로그인 폼을 웹브라우저에 출력한다. */
     if (session.getAttribute("UserId") == null) { 
     %>
     <script>
@@ -20,6 +27,8 @@
         if (!form.user_id.value) {
             alert("아이디를 입력하세요.");
             form.user_id.focus();
+            //여기서 false를 전하는 이유 공부하기 문제가있다면 
+            //submit으로 전송되지않게끔 false를 전달
             return false;
         }
         if (form.user_pw.value == "") {
@@ -30,6 +39,7 @@
     }
     </script>
 
+	<!-- 회원정보는 보안이 필요하므로 반드시 post방식으로 전송해야한다. -->
     <form action="LoginProcess.jsp" method="post" name="loginFrm"
         onsubmit="return validateForm(this);">
         아이디 : <input type="text" name="user_id" /><br />
@@ -38,6 +48,7 @@
     </form>
     <%
     } else {  
+    	//로그인이 된 상태에서는 회원의 이름과 로그아웃 버튼을 출력한다.
     %>
         <%= session.getAttribute("UserName") %> 회원님, 로그인하셨습니다.<br />
         <a href="Logout.jsp">[로그아웃]</a>
