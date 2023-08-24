@@ -109,6 +109,7 @@ dao.close();
    
     <table border="1" width="90%">
         <tr align="right">
+        	<!-- 글쓰기 버튼을 클릭했을때 Write.jsp로 이동한다. -->
             <td><button type="button" onclick="location.href='Write.jsp';">글쓰기
                 </button></td>
         </tr>
