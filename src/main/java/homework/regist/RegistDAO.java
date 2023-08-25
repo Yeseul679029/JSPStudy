@@ -3,6 +3,7 @@ package homework.regist;
 import common.JDBConnect;
 import jakarta.servlet.ServletContext;
 
+//쿼리문 하나를 실행하기 위한 용도 
 public class RegistDAO extends JDBConnect{
 
 	//DB연결을 위한 인수생성자 정의
