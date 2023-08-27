@@ -1,3 +1,5 @@
+<%@page import="homework.regist.RegistDAO"%>
+<%@page import="homework.regist.RegistDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -10,6 +12,19 @@ musthave 계정의 regist_member 테이블에 입력한 아이디가 존재하�
 //만약 중복된 아이디가 없어 사용할 수 있다면 true를 반환
 //중복된 아이디가 있다면 false 반환
 boolean isExist = true; 
+
+RegistDTO dto = new RegistDTO();
+RegistDAO dao = new RegistDAO(application);
+
+dto = dao.selectView(id);
+
+if(id.equals(dto.getId())){
+	isExist= false;
+}
+else{
+	
+}
+
 %>    
 <!DOCTYPE html>
 <html>

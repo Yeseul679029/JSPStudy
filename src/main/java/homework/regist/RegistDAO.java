@@ -44,4 +44,29 @@ public class RegistDAO extends JDBConnect{
 	}
 	
 	
+	public RegistDTO selectView(String id) {
+		
+		RegistDTO dto = new RegistDTO()	;
+		
+		String query = "SELECT * FROM member2 WHERE id=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+		
+			if(rs.next()) {
+				dto.setId(rs.getString("id"));
+			}
+		
+		} 
+		catch (Exception e) {
+			System.out.println("중복확인 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	
 }
