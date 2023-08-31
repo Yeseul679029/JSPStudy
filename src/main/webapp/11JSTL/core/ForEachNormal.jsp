@@ -31,6 +31,7 @@ forEach태그의 일반 for문 형태
 		※ 즉 일반 for문에서는 index와 current는 동일한 값이 출력된다.
 	 -->
 	<table border="1">
+		<%--  loop는 반복상태에 대한 변수명이라고 보면된다.--%>
 		<c:forEach begin="3" end="5" var="i" varStatus="loop">
 			<tr>
 				<td>count : ${ loop.count }</td>

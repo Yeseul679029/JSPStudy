@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,15 +47,18 @@
         </tr>
 	</c:when>
 	<c:otherwise>
+		<%-- 
+		확장 for문 형태로 List에 저장된 레코드를 반복 출력한다. 
+		items속성에는 반복가능한 객체를 기술하고, 순서대로 추출된 데이터는
+		var속성에 지정한 변수로 저장된다.
+		--%>
 		<c:forEach items="${boardLists }" var="row" varStatus="loop">
 		<tr align="center">
-            <td>
+            <td>	<!-- 번호 -->
 				${ map.totalCount - (((map.pageNum -1) * map.pageSize) + loop.index) }
 			</td>
-            <td align="left">
-                <a href="../mvcboard/view.do?idx=${ row.idx }">
-                	${ row.title }
-                </a>
+            <td align="left">	<!-- 제목(링크) -->
+                <a href="../mvcboard/view.do?idx=${ row.idx }"> ${ row.title } </a>
             </td> 
             <td>${ row.name }</td>
             <td>${ row.visitcount }</td>
@@ -76,6 +79,7 @@
     <table border="1" width="90%">
         <tr align="center">
             <td>
+            	<!-- 페이지번호 출력 -->
                 ${ map.pagingImg }
             </td>
             <td width="100"><button type="button"

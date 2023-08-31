@@ -1,5 +1,8 @@
 package utils;
 
+import java.io.PrintWriter;
+
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.jsp.JspWriter;
 
 public class JSFunction {
@@ -14,7 +17,7 @@ public class JSFunction {
 			//Java script를 하나의 문자열로 정의한다.
 			String script = ""
 					+"<script>"
-					+"		alert('"+msg+"');"
+					+"		alert('"+ msg +"');"
 					+"		location.href='"+ url +"';"
 					+"</script>";
 			//해당 문자열을 웹브라우저에 출력한다.
@@ -35,4 +38,61 @@ public class JSFunction {
 		} 
 		catch (Exception e) {}
 	}
+	
+	
+	/* 상단 2개의 메서드는JSP에서 사용하기 위해 정의하였다. JSP에서 out
+	내장객체를 전달하면 매개변수로 받아서 사용한다. 
+	아래 2개는 서블릿(Servlet)에서 사용하기 위해 메서드 오버로딩을 통해
+	정의하였다. 서블릿이 직접 요청을 받으므로 response내장객체를 통해
+	화면출력 용도인 PrintWriter 객체를 생성하여 사용한다. */
+	
+	public static void alertLocation(HttpServletResponse resp, String msg, String url) {
+		try {
+			//컨텐츠 타입을 설정
+			resp.setContentType("text/html;charset=UTF-8");
+			//PrintWriter객체를 통해 스크립트를 서블릿에서 직접 출력한다.
+			PrintWriter writer = resp.getWriter();
+			
+			String script = ""
+					+"<script>"
+					+"		alert('"+ msg +"');"
+					+"		location.href='"+ url +"';"
+					+"</script>";
+			writer.println(script);
+		} 
+		catch (Exception e) {}
+	}
+	
+	public static void alertBack(HttpServletResponse resp, String msg) {
+		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter writer = resp.getWriter();
+			String script = ""
+					+"<script>"
+					+"		alert('"+msg+"');"
+					+"		history.back();"
+					+"</script>";
+			writer.println(script);
+			
+		} 
+		catch (Exception e) {}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
