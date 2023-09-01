@@ -1,6 +1,8 @@
 package model2.mvcboard;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,10 +35,26 @@ public class ViewController extends HttpServlet {
 		<br>로 변경해야 한다. */
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 	
+		//첨부파일 확장자 추출 및 이미지 타입 확인
+		String ext = null, fileName = dto.getSfile();
+		//파일의 확장자를 추출한다
+		if(fileName!=null) {
+			ext = fileName.substring(fileName.lastIndexOf(".")+1);
+		}
+		//구분하고싶은 확장자를 배열에 담아 컬렉션으로 생성
+		String[] mimeStr = {"png","jpg","gif"};
+		List<String> mimeList = Arrays.asList(mimeStr);
+		
+		boolean isImage = false;
+		//컬렉션에 같은확장자가 있는지 확인해 true를 반환
+		if(mimeList.contains(ext)) {
+			isImage = true;
+		}
 		
 		
 		//게시물(dto)을 request영역에 저장한 후 뷰로 포워드한다.
 		req.setAttribute("dto", dto);
+		req.setAttribute("isImage", isImage);
 		req.getRequestDispatcher("/14MVCBoard/View.jsp").forward(req, resp);
 		
 	}

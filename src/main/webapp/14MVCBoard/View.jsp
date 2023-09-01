@@ -29,7 +29,13 @@
     </tr>
     <tr>
         <td>내용</td>
-        <td colspan="3" height="100">${dto.content }</td>
+        <td colspan="3" height="100">
+        ${dto.content }
+        <!-- if문을 사용해서 img파일인경우 content에 출력 -->
+        <c:if test="${ not empty dto.ofile and isImage eq true }">
+        	<br /><img src="../Uploads/${ dto.sfile }" style="max-width: 100%" />
+        </c:if>
+        </td>
     </tr> 
     <tr>
         <td>첨부파일</td>
