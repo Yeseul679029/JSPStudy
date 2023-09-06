@@ -7,34 +7,34 @@
     pageEncoding="UTF-8"%>
     
 <%
-//DAO객체 생성을 통해 DB에 연결한다.
-BoardDAO dao = new BoardDAO(application);
+    //DAO객체 생성을 통해 DB에 연결한다.
+    BoardDAO dao = new BoardDAO(application);
 
-/* 검색어가 있는 경우 클라이언트가 선택한 필드명과 검색어를 저장할
-Map컬렉션을 생성한다. */
-Map<String, Object> param = new HashMap<String, Object>();
+    /* 검색어가 있는 경우 클라이언트가 선택한 필드명과 검색어를 저장할
+    Map컬렉션을 생성한다. */
+    Map<String, Object> param = new HashMap<String, Object>();
 
-/* 검색폼에서 입력한 검색어와 필드명을 파라미터로 받아온다. 해당 <form>
-태그의 전송방식은 get, action 속성은 없는 상태이므로 현재 페이지로
-폼값이 전송된다. */
-String searchField = request.getParameter("searchField");
-String searchWord = request.getParameter("searchWord");
+    /* 검색폼에서 입력한 검색어와 필드명을 파라미터로 받아온다. 해당 <form>
+    태그의 전송방식은 get, action 속성은 없는 상태이므로 현재 페이지로
+    폼값이 전송된다. */
+    String searchField = request.getParameter("searchField");
+    String searchWord = request.getParameter("searchWord");
 
-if(searchWord != null){
-	/* 클라이언트가 입력한 검색어가 있는경우에만 Map컬렉션에
-	컬럼명과 검색어를 추가한다. 해당 값은 DB처리를 위한 Model객체로
-	전달된다. */
-	param.put("searchField", searchField);
-	param.put("searchWord", searchWord);
-}
+    if(searchWord != null){
+    	/* 클라이언트가 입력한 검색어가 있는경우에만 Map컬렉션에
+    	컬럼명과 검색어를 추가한다. 해당 값은 DB처리를 위한 Model객체로
+    	전달된다. */
+    	param.put("searchField", searchField);
+    	param.put("searchWord", searchWord);
+    }
 
-//Map컬렉션을 인수로 게시물의 갯수를 카운트한다.
-int totalCount = dao.selectCount(param);
-//목록에 출력할 게시물을 인출하여 반환받는다. 
-List<BoardDTO> boardLists = dao.selectList(param);
-//DB 자원 해제
-dao.close();
-%>
+    //Map컬렉션을 인수로 게시물의 갯수를 카운트한다.
+    int totalCount = dao.selectCount(param);
+    //목록에 출력할 게시물을 인출하여 반환받는다. 
+    List<BoardDTO> boardLists = dao.selectList(param);
+    //DB 자원 해제
+    dao.close();
+    %>
 <!DOCTYPE html>
 <html>
 <head>
